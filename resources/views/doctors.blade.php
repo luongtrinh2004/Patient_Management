@@ -1,39 +1,27 @@
 @extends('layouts.app')
 
-@section('title', 'Doctors')
+@section('title', 'Our Doctors')
 
 @section('content')
-<div class="container">
-    <h1 class="text-center">Our Doctors</h1>
-    <p class="text-center">Meet our experienced and compassionate medical professionals.</p>
+<div class="container py-5">
+    <h2 class="text-center mb-4" style="font-family: 'Poppins', sans-serif; color: #0056b3;">Meet Our Doctors</h2>
     <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Doctor 1">
-                <div class="card-body">
-                    <h5 class="card-title">Dr. Nguyen Van A</h5>
-                    <p class="card-text">Specialist in Cardiology</p>
+        @foreach($doctors as $doctor)
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <img src="{{ asset($doctor->image) }}" class="card-img-top mx-auto d-block" alt="{{ $doctor->name }}"
+                    style="width: 75%; height: 250px; object-fit: cover; border-radius: 10px;">
+
+
+
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: 'Poppins', sans-serif;">{{ $doctor->name }}</h5>
+                    <p class="card-text" style="color: #007bff;">{{ $doctor->specialty }}</p>
+                    <p class="card-text">{{ $doctor->bio }}</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Doctor 2">
-                <div class="card-body">
-                    <h5 class="card-title">Dr. Tran Thi B</h5>
-                    <p class="card-text">Specialist in Pediatrics</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Doctor 3">
-                <div class="card-body">
-                    <h5 class="card-title">Dr. Le Van C</h5>
-                    <p class="card-text">Specialist in Neurology</p>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 @endsection
