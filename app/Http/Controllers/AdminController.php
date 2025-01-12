@@ -8,16 +8,24 @@ use App\Models\Doctor;
 class AdminController extends Controller
 {
     public function showDoctors(Request $request)
-    {
-        $search = $request->input('search');
-        $doctors = Doctor::when($search, function ($query, $search) {
-            return $query->where('name', 'like', "%{$search}%")
-                         ->orWhere('email', 'like', "%{$search}%")
-                         ->orWhere('specialty', 'like', "%{$search}%");
-        })->get();
+{
+    $search = $request->input('search');
+    $editDoctor = null;
 
-        return view('role.adminfixdoctors', compact('doctors', 'search'));
+    // Nếu có yêu cầu sửa, lấy thông tin bác sĩ
+    if ($request->has('edit_id')) {
+        $editDoctor = Doctor::findOrFail($request->edit_id);
     }
+
+    $doctors = Doctor::when($search, function ($query, $search) {
+        return $query->where('name', 'like', "%{$search}%")
+                     ->orWhere('email', 'like', "%{$search}%")
+                     ->orWhere('specialty', 'like', "%{$search}%");
+    })->get();
+
+    return view('role.adminfixdoctors', compact('doctors', 'search', 'editDoctor'));
+}
+
 
     public function storeDoctor(Request $request)
     {
