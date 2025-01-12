@@ -5,6 +5,19 @@
 @section('content')
 <div class="container py-4">
     <h1 class="text-center mb-4" style="font-family: 'Poppins', sans-serif; color: #0056b3;">Admin Dashboard</h1>
+
+    <!-- Phần Log Out -->
+    <div class="d-flex justify-content-end mb-5">
+        <!-- Thêm margin-bottom -->
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="btn btn-primary logout-btn">
+                <i class="bi bi-box-arrow-right"></i> Log Out
+            </button>
+        </form>
+    </div>
+
+    <!-- Phần Quản lý -->
     <div class="row">
         <div class="col-md-3">
             <div class="card">
@@ -40,4 +53,5 @@
         </div>
     </div>
 </div>
+
 @endsection

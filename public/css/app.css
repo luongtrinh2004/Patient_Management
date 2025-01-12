@@ -111,3 +111,18 @@ header .dropdown-menu {
 
 
 
+.logout-btn {
+    background-color: #007bff; /* Màu xanh */
+    color: white; /* Màu chữ trắng */
+    border-radius: 20px; /* Bo góc */
+    padding: 10px 20px; /* Khoảng cách */
+    font-size: 14px; /* Kích thước chữ */
+    font-family: 'Poppins', sans-serif; /* Font chữ */
+    border: none; /* Xóa đường viền */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng hover */
+}
+
+.logout-btn:hover {
+    background-color: #0056b3; /* Màu xanh đậm hơn khi hover */
+    transform: scale(1.05); /* Phóng to nhẹ khi hover */
+}
