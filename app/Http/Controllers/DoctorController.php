@@ -63,4 +63,14 @@ public function destroy($id)
     return redirect()->back()->with('success', 'Bác sĩ được xóa thành công!');
 }
 
+public function showSchedule()
+{
+    // Assuming 'appointments' table has a 'doctor_id' field
+    $appointments = Appointment::where('doctor_id', auth()->id())->with('patient')->get();
+
+    return view('role.schedule', compact('appointments'));
+}
+
+
+
 }

@@ -23,6 +23,7 @@ class AdminController extends Controller
                      ->orWhere('specialty', 'like', "%{$search}%");
     })->get();
 
+
     return view('role.adminfixdoctors', compact('doctors', 'search', 'editDoctor'));
 }
 
@@ -54,6 +55,13 @@ class AdminController extends Controller
             'phone' => $request->phone,
             'bio' => $request->bio,
             'image' => $imagePath,
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => 'doctor', // Gán vai trò là doctor
         ]);
 
         return redirect()->route('admin.doctors.index')->with('success', 'Bác sĩ đã được thêm thành công.');

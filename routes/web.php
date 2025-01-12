@@ -59,3 +59,8 @@ Route::get('/contact', function () {
 
 // Home Route sau khi đăng nhập
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+
+
+Route::middleware(['auth', 'role:doctor'])->group(function () {
+    Route::get('/doctor/schedule', [DoctorController::class, 'showSchedule'])->name('doctor.schedule');
+});
