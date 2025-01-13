@@ -5,6 +5,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\AppointmentController;
 use Illuminate\Support\Facades\Route;
 
 // Trang chủ
@@ -38,13 +39,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/doctors/{id}/edit', [AdminController::class, 'editDoctor'])->name('admin.doctors.edit');
     Route::post('/admin/doctors/{id}/update', [AdminController::class, 'updateDoctor'])->name('admin.doctors.update');
     Route::delete('/admin/doctors/{id}', [AdminController::class, 'destroyDoctor'])->name('admin.doctors.destroy');
+
+    // Routes for managing appointments
+    Route::get('/admin/appointments', [AdminController::class, 'showAppointments'])->name('admin.appointments.index');
+    Route::put('/admin/appointments/{id}/approve', [AdminController::class, 'approveAppointment'])->name('admin.appointments.approve');
+    Route::put('/admin/appointments/{id}/reject', [AdminController::class, 'rejectAppointment'])->name('admin.appointments.reject');
 });
 
-// Route cho AdminDoctor
+// Routes cho AdminDoctor
 Route::middleware(['auth', 'role:admindoctor'])->group(function () {
     Route::get('/admindoctor/dashboard', function () {
         return view('role.admindoctor');
     })->name('admindoctor.dashboard');
+
+    Route::get('/admindoctor/schedule', [DoctorController::class, 'showSchedule'])->name('doctor.schedule');
 });
 
 // Routes chung
@@ -60,7 +68,7 @@ Route::get('/contact', function () {
 // Home Route sau khi đăng nhập
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
-
-Route::middleware(['auth', 'role:doctor'])->group(function () {
-    Route::get('/doctor/schedule', [DoctorController::class, 'showSchedule'])->name('doctor.schedule');
-});
+// Form đặt lịch
+Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
+// Xử lý lưu lịch
+Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');

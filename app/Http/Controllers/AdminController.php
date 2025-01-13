@@ -4,9 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Doctor;
+use App\Models\Appointment;
+
 
 class AdminController extends Controller
 {
+    public function showAppointments()
+    {
+        $appointments = Appointment::with('doctor')->get(); // Chỉ cần load thông tin bác sĩ
+        return view('role.manageappointments', compact('appointments'));
+    }
+    
+
+public function approveAppointment($id)
+{
+    $appointment = Appointment::findOrFail($id);
+    $appointment->update(['status' => 'approved']); // Duyệt lịch hẹn
+    return redirect()->back()->with('success', 'Lịch hẹn đã được duyệt.');
+}
+
+public function rejectAppointment($id)
+{
+    $appointment = Appointment::findOrFail($id);
+    $appointment->update(['status' => 'rejected']); // Từ chối lịch hẹn
+    return redirect()->back()->with('success', 'Lịch hẹn đã bị từ chối.');
+}
+
     public function showDoctors(Request $request)
 {
     $search = $request->input('search');

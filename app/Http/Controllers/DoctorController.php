@@ -65,8 +65,10 @@ public function destroy($id)
 
 public function showSchedule()
 {
-    // Assuming 'appointments' table has a 'doctor_id' field
-    $appointments = Appointment::where('doctor_id', auth()->id())->with('patient')->get();
+    $appointments = Appointment::where('doctor_id', auth()->id())
+        ->with('patient')
+        ->orderBy('appointment_date', 'asc')
+        ->get();
 
     return view('role.schedule', compact('appointments'));
 }

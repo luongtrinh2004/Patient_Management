@@ -31,7 +31,7 @@
                 </div>
 
                 <!-- Actions -->
-                <a href="#" class="btn btn-primary btn-sm rounded-pill px-3"
+                <a href="/appointments/create" class="btn btn-primary btn-sm rounded-pill px-3"
                     style="background-color: #007bff; border-color: #007bff;">Đặt lịch khám</a>
                 <a href="#" class="btn btn-info btn-sm rounded-pill px-3" style="color: white;">1900 886648</a>
                 <a href="#" class="btn btn-warning btn-sm rounded-pill px-3" style="color: white;">Hướng dẫn khách
