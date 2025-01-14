@@ -23,22 +23,24 @@ class Appointment extends Model
         'status',
     ];
 
+    /**
+     * Quan hệ với bác sĩ
+     */
     public function doctor()
     {
-        return $this->belongsTo(Doctor::class);
+        return $this->belongsTo(Doctor::class, 'doctor_id');
     }
 
-public function patient()
-{
-    return $this->belongsTo(Patient::class);
-}
+    /**
+     * Quan hệ với bệnh nhân
+     */
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class, 'patient_id');
+    }
 
     /**
      * Scope để lấy các lịch hẹn của bác sĩ cụ thể.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param int $doctorId
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeForDoctor($query, $doctorId)
     {
@@ -47,10 +49,6 @@ public function patient()
 
     /**
      * Scope để lấy các lịch hẹn của bệnh nhân cụ thể.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param int $patientId
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeForPatient($query, $patientId)
     {
@@ -59,8 +57,6 @@ public function patient()
 
     /**
      * Kiểm tra trạng thái của lịch hẹn.
-     *
-     * @return bool
      */
     public function isPending()
     {

@@ -79,7 +79,11 @@
         </div>
     </nav>
 
-
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="content">
         @yield('content')
     </div>
@@ -88,6 +92,7 @@
         style="background-color:rgb(34, 152, 230); color: white; font-weight: bold; text-align: center; padding: 1rem 0;">
         <p>&copy; 2025 Phenikaa Clinic. All rights reserved.</p>
     </footer>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

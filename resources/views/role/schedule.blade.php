@@ -23,16 +23,12 @@
             @foreach($appointments as $appointment)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $appointment->patient->name }}</td>
-                <td>{{ $appointment->date }}</td>
-                <td>{{ $appointment->note }}</td>
+                <td>{{ $appointment->name }}</td>
+                <td>{{ $appointment->appointment_date }}</td>
+                <td>{{ $appointment->description }}</td>
                 <td>
-                    @if($appointment->status === 'completed')
-                    <span class="badge bg-success">Hoàn thành</span>
-                    @elseif($appointment->status === 'pending')
-                    <span class="badge bg-warning">Đang chờ</span>
-                    @else
-                    <span class="badge bg-danger">Đã hủy</span>
+                    @if($appointment->status === 'approved')
+                    <span class="badge bg-success">Đã duyệt</span>
                     @endif
                 </td>
             </tr>
@@ -40,5 +36,6 @@
         </tbody>
     </table>
     @endif
+
 </div>
 @endsection

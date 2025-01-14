@@ -56,6 +56,13 @@
                         @method('PUT')
                         <button type="submit" class="btn btn-danger btn-sm">Từ chối</button>
                     </form>
+                    <form method="POST" action="{{ route('admin.appointments.delete', $appointment->id) }}"
+                        class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa lịch hẹn này?')">Xóa</button>
+                    </form>
                 </td>
             </tr>
             @endforeach

@@ -72,3 +72,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
 // Xử lý lưu lịch
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+Route::delete('/admin/appointments/{id}', [AdminController::class, 'deleteAppointment'])->name('admin.appointments.delete');
