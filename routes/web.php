@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\SupportController;
 use Illuminate\Support\Facades\Route;
 
 // Trang chủ
@@ -44,6 +45,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/appointments', [AdminController::class, 'showAppointments'])->name('admin.appointments.index');
     Route::put('/admin/appointments/{id}/approve', [AdminController::class, 'approveAppointment'])->name('admin.appointments.approve');
     Route::put('/admin/appointments/{id}/reject', [AdminController::class, 'rejectAppointment'])->name('admin.appointments.reject');
+    Route::delete('/admin/appointments/{id}', [AdminController::class, 'deleteAppointment'])->name('admin.appointments.delete');
+
+    // Routes for managing supports
+    Route::get('/admin/supports', [SupportController::class, 'index'])->name('admin.supports.index');
+    Route::delete('/admin/supports/{id}', [SupportController::class, 'destroy'])->name('admin.supports.destroy');
 });
 
 // Routes cho AdminDoctor
@@ -73,3 +79,7 @@ Route::get('/appointments/create', [AppointmentController::class, 'create'])->na
 // Xử lý lưu lịch
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
 Route::delete('/admin/appointments/{id}', [AdminController::class, 'deleteAppointment'])->name('admin.appointments.delete');
+
+// Routes cho Hỗ trợ
+Route::get('/support', [SupportController::class, 'create'])->name('support.create');
+Route::post('/support', [SupportController::class, 'store'])->name('support.store');

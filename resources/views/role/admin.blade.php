@@ -30,7 +30,7 @@
                 </div>
 
                 <!-- Actions -->
-                <a href="#" class="btn btn-primary btn-sm rounded-pill px-3"
+                <a href="/appointments/create" class="btn btn-primary btn-sm rounded-pill px-3"
                     style="background-color: #007bff; border-color: #007bff;">Đặt lịch khám</a>
                 <a href="#" class="btn btn-info btn-sm rounded-pill px-3" style="color: white;">1900 886648</a>
                 <a href="#" class="btn btn-warning btn-sm rounded-pill px-3" style="color: white;">Hướng dẫn khách
@@ -95,8 +95,8 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Cài đặt website</h5>
-                        <a href="{{ url('/admin/settings') }}" class="btn btn-primary">Xem chi tiết</a>
+                        <h5 class="card-title">Hỗ Trợ của Bệnh Nhân</h5>
+                        <a href="{{ url('/admin/supports') }}" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>
             </div>

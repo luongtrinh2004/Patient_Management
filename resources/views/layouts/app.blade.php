@@ -34,12 +34,13 @@
                 <a href="/appointments/create" class="btn btn-primary btn-sm rounded-pill px-3"
                     style="background-color: #007bff; border-color: #007bff;">Đặt lịch khám</a>
                 <a href="#" class="btn btn-info btn-sm rounded-pill px-3" style="color: white;">1900 886648</a>
-                <a href="#" class="btn btn-warning btn-sm rounded-pill px-3" style="color: white;">Hướng dẫn khách
+                <a href="/support" class="btn btn-warning btn-sm rounded-pill px-3" style="color: white;">Hướng dẫn
+                    khách
                     hàng</a>
                 <div class="dropdown">
                     <button class="btn btn-light btn-sm rounded-circle dropdown-toggle" id="languageDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/img/vn-flag.png" alt="VN" style="height: 20px;"> <!-- Icon cờ -->
+                        <img src="/img/vietnam.png" alt="VN" style="height: 20px;"> <!-- Icon cờ -->
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="languageDropdown">
                         <li><a class="dropdown-item" href="#">Vietnamese</a></li>
