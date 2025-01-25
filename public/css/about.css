@@ -121,7 +121,8 @@ a {
 }
 
 .bg-light-white-blue {
-    background-color: #d5edff;
+    /* background-color: #d5edff; */
+    background-image: linear-gradient(to top, #fff, #cfeaff);
 }
 
 .mt-8 {
@@ -170,7 +171,7 @@ a {
 .grid-2 {
     display: grid;
     grid-template-columns: 50% 50%;
-    column-gap: 1.5rem;
+    gap: 1.5rem;
 }
 
 .grid-3 {
@@ -248,4 +249,113 @@ a {
 .hover-blue:hover {
     background-color: #0056b3;
     color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+
+
+.card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 350px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px;
+    text-align: left;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    color: #002E6D;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.load-more {
+    background-color: #FF7F50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.load-more:hover {
+    background-color: #FF4500;
+}
+
+.csvc {
+    text-align: center;
+    padding: 20px;
+}
+
+.title-csvc {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #004a80;
+}
+
+.sub-title-csvc {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.tag-csvc {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 240px;
+    overflow: hidden;
+}
+
+.tag img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.tag-content {
+    padding: 15px;
+}
+
+.tag-content h3 {
+    font-size: 18px;
+    color: #004a80;
+    margin: 0 0 10px;
+}
+
+.tag-content p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
 }
