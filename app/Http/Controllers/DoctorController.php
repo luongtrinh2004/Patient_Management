@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Doctor; // Import model Doctor
 use App\Models\Appointment;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorController extends Controller
 {
@@ -86,11 +87,15 @@ class DoctorController extends Controller
      */
     public function showSchedule()
     {
-        $appointments = Appointment::with(['patient', 'doctor'])
-        ->where('doctor_id', auth()->id()) // Chỉ lấy lịch hẹn của bác sĩ đăng nhập
-        ->where('status', 'approved') // Chỉ lấy lịch hẹn đã được duyệt
-        ->get();
+        // Kiểm tra nếu user có role 'admindoctor' thì vẫn lấy được lịch
+        if (Auth::user()->role === 'admindoctor') {
+            $appointments = Appointment::with(['patient', 'doctor'])
+                ->where('doctor_id', Auth::id()) // Lấy lịch khám theo ID của bác sĩ đăng nhập
+                ->get();
 
-    return view('role.schedule', compact('appointments'));
+            return view('role.schedule', compact('appointments'));
+        } else {
+            return redirect()->route('home')->with('error', 'Bạn không có quyền truy cập trang này.');
+        }
     }
 }

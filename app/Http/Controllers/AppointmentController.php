@@ -39,7 +39,7 @@ class AppointmentController extends Controller
         'cccd' => $request->cccd,
         'appointment_date' => $request->appointment_date,
         'description' => $request->description,
-        'status' => 'pending',
+        'status' => 'approved',
     ]);
 
     return redirect()->route('appointments.create')->with('success', 'Đặt lịch thành công. Chờ duyệt!');
