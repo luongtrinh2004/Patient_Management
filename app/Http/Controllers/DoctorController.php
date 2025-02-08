@@ -91,6 +91,7 @@ class DoctorController extends Controller
         if (Auth::user()->role === 'admindoctor') {
             $appointments = Appointment::with(['patient', 'doctor'])
                 ->where('doctor_id', Auth::id()) // Lấy lịch khám theo ID của bác sĩ đăng nhập
+                ->orderBy('appointment_date', 'asc')
                 ->get();
 
             return view('role.schedule', compact('appointments'));
@@ -98,4 +99,16 @@ class DoctorController extends Controller
             return redirect()->route('home')->with('error', 'Bạn không có quyền truy cập trang này.');
         }
     }
+
+    public function showPatients()
+{
+    $patients = Appointment::where('doctor_id', Auth::id()) // Chỉ lấy bệnh nhân của doctor hiện tại
+        ->with('patient') // Load thông tin bệnh nhân
+        ->get();
+
+    return view('role.patients', compact('patients'));
+}
+
+    
+
 }

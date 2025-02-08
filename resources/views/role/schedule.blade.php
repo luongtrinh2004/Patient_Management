@@ -22,7 +22,7 @@
             @foreach($appointments as $appointment)
             <tr>
                 <td>{{ $appointment->name }}</td>
-                <td>{{ $appointment->appointment_date }}</td>
+                <td>{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('d/m/Y') }}</td>
                 <td>{{ $appointment->description }}</td>
                 <td>
                     @if($appointment->status === 'approved')

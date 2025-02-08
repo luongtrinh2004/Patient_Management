@@ -60,6 +60,7 @@ Route::middleware(['auth', 'role:admindoctor'])->group(function () {
     })->name('admindoctor.dashboard');
 
     Route::get('/admindoctor/schedule', [DoctorController::class, 'showSchedule'])->name('doctor.schedule');
+    Route::get('/admindoctor/patients', [DoctorController::class, 'showPatients'])->name('doctor.patients');
 });
 
 // Routes chung
