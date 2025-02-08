@@ -129,6 +129,15 @@ public function destroyDoctor($id)
     return redirect()->route('admin.doctors.index')->with('success', 'Bác sĩ và tài khoản liên kết đã được xóa thành công.');
 }
 
+    public function showAllPatients()
+{
+    // Lấy danh sách tất cả bệnh nhân đã đặt lịch với bất kỳ bác sĩ nào
+    $patients = Appointment::with(['patient', 'doctor'])
+        ->orderBy('appointment_date', 'ASC') // Sắp xếp theo ngày khám gần nhất
+        ->get();
+
+    return view('role.adminpatients', compact('patients'));
+}
 
 
     public function showAppointments()

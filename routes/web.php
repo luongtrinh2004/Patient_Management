@@ -96,6 +96,7 @@ Route::middleware(['auth'])->group(function () {
     // Admin vẫn có thể xem toàn bộ lịch khám
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/admin/appointments', [AdminController::class, 'showAppointments'])->name('admin.appointments.index');
+        Route::get('/admin/patients', [AdminController::class, 'showAllPatients'])->name('admin.patients');
     });
 });
 
