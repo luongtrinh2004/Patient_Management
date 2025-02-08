@@ -82,6 +82,15 @@ class DoctorController extends Controller
         return redirect()->back()->with('success', 'Bác sĩ đã được xóa thành công!');
     }
 
+
+
+
+
+    public function getDoctorsBySpecialty($specialty)
+    {
+        $doctors = Doctor::where('specialty', $specialty)->get(['id', 'name']);
+        return response()->json($doctors);
+    }
     /**
      * Hiển thị lịch trình khám của bác sĩ.
      */

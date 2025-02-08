@@ -13,7 +13,8 @@ class AppointmentController extends Controller
     public function create()
     {
         $doctors = Doctor::all(); // Lấy tất cả bác sĩ từ bảng `doctors`
-        return view('appointmentcreate', compact('doctors'));
+        $specialties = Doctor::distinct()->pluck('specialty');
+        return view('appointmentcreate', compact('specialties', 'doctors'));
     }
 
     // Xử lý Lưu Lịch hẹn

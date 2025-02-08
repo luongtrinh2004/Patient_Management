@@ -68,6 +68,8 @@ Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index'
 Route::get('/about', function () {
     return view('about'); // Trang About Us
 })->name('about');
+Route::get('/get-doctors/{specialty}', [DoctorController::class, 'getDoctorsBySpecialty']);
+
 
 Route::get('/services', function () {
     return view('services');
