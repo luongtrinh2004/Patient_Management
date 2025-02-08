@@ -21,7 +21,7 @@
         <tbody>
             @foreach($appointments as $appointment)
             <tr>
-                <td>{{ optional($appointment->patient)->name }}</td>
+                <td>{{ $appointment->name }}</td>
                 <td>{{ $appointment->appointment_date }}</td>
                 <td>{{ $appointment->description }}</td>
                 <td>
