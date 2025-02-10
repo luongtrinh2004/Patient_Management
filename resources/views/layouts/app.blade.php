@@ -136,12 +136,14 @@
                 <!-- Cột 4: Ứng dụng & Mạng xã hội -->
                 <div class="col-md-3 footer-col">
                     <h5 class="footer-title">TẢI APP PHENIKAA MEC</h5>
-                    <div class="qr-box">📱 Mã QR</div>
+                    <div class="qr-box">
+                        <a href="#"><img src="{{ asset('img/qr.png') }}" alt="Facebook"></a>
+                    </div>
 
                     <div class="social-icons">
-                        <a href="#"><img src="{{ asset('img/facebook-icon.png') }}" alt="Facebook"></a>
-                        <a href="#"><img src="{{ asset('img/youtube-icon.png') }}" alt="YouTube"></a>
-                        <a href="#"><img src="{{ asset('img/tiktok-icon.png') }}" alt="TikTok"></a>
+                        <a href="#"><img src="{{ asset('img/iconfb.webp') }}" alt="Facebook"></a>
+                        <a href="#"><img src="{{ asset('img/iconyoutube.webp') }}" alt="YouTube"></a>
+                        <a href="#"><img src="{{ asset('img/icontiktok.webp') }}" alt="TikTok"></a>
                     </div>
                 </div>
             </div>
