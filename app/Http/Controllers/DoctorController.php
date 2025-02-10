@@ -91,6 +91,21 @@ class DoctorController extends Controller
         $doctors = Doctor::where('specialty', $specialty)->get(['id', 'name']);
         return response()->json($doctors);
     }
+
+    public function showDashboard()
+    {
+        // Lấy thông tin bác sĩ từ bảng doctors (có thể dùng ID từ Auth hoặc bảng users)
+        $doctor = Doctor::where('email', Auth::user()->email)->first();
+    
+        // Kiểm tra nếu bác sĩ không tồn tại
+        if (!$doctor) {
+            return redirect()->route('home')->with('error', 'Không tìm thấy thông tin bác sĩ.');
+        }
+    
+        return view('role.admindoctor', compact('doctor'));
+    }
+    
+
     /**
      * Hiển thị lịch trình khám của bác sĩ.
      */

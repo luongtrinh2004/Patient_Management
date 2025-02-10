@@ -88,6 +88,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
     Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
 
+    Route::middleware(['auth', 'role:admindoctor'])->group(function () {
+        Route::get('/admindoctor/dashboard', [DoctorController::class, 'showDashboard'])->name('admindoctor.dashboard');
+    });
+    
+
     // Doctor xem lịch khám ngay khi bệnh nhân đặt (không cần Admin duyệt)
     Route::middleware(['role:admindoctor'])->group(function () {
         Route::get('/doctor/schedule', [DoctorController::class, 'showSchedule'])->name('doctor.schedule');
