@@ -86,7 +86,7 @@
                         <div class="grid-3" style="margin:20px 25px;margin-left: 85px;">
                             <div class="grid-item">
                                 <img src="/img/img31.webp" alt="Tầm nhìn">
-                                <h3 class="hover-blue" style="cursor:pointer;">
+                                <h3 class="hover-blue" style="cursor:pointer;height:65px">
                                     Quản Lý Song Thai - Đa Thai</h3>
                             </div>
                             <div class="grid-item">
@@ -95,14 +95,14 @@
                             </div>
                             <div class="grid-item">
                                 <img src="/img/img24.webp" alt="Giá trị cốt lõi">
-                                <h3 class="hover-blue" style="cursor:pointer;">Chăm Sóc Thai Sản Trọn Gói</h3>
+                                <h3 class="hover-blue" style="cursor:pointer;height:60px">Chăm Sóc Thai Sản Trọn Gói</h3>
                             </div>
                             <div class="grid-item">
                                 <img src="/img/img25.webp" alt="Giá trị cốt lõi">
                                 <h3 class="hover-blue" style="cursor:pointer;">Gói Phục Hồi Chức Năng</h3>
                             </div>
                             <div class="grid-item">
-                                <img src="/img/img26.webp" alt="Giá trị cốt lõi">
+                                <img src="/img/img26.webp" alt="Giá trị cốt lõi" style="height: 166px;">
                                 <h3 class="hover-blue" style="cursor:pointer;">Nội Soi Tiêu Hóa</h3>
                             </div>
                             <div class="grid-item">
