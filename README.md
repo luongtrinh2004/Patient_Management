@@ -1,64 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Quản Lý Phòng Khám Da Liễu
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Clinic Management](https://via.placeholder.com/1000x400?text=Clinic+Management+System)
 
-## About Laravel
+## Giới thiệu
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Quản Lý Phòng Khám Da Liễu** là hệ thống giúp quản lý dịch vụ y tế, bác sĩ, bệnh nhân và lịch hẹn một cách hiệu quả. Dự án được xây dựng bằng Laravel và Bootstrap để mang lại trải nghiệm mượt mà và thân thiện với người dùng.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tính năng chính
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   🌟 **Quản lý dịch vụ**: Thêm, sửa, xóa các dịch vụ khám da liễu.
+-   👨‍⚕️ **Quản lý bác sĩ**: Theo dõi danh sách bác sĩ và thông tin chuyên môn.
+-   📅 **Quản lý lịch hẹn**: Cho phép bệnh nhân đặt lịch hẹn và admin xác nhận.
+-   🔒 **Quản lý tài khoản**: Đăng ký, đăng nhập và phân quyền (Admin, Bác sĩ, Bệnh nhân).
+-   📊 **Thống kê và báo cáo**: Hiển thị thông tin tổng quan về hoạt động của phòng khám.
 
-## Learning Laravel
+## Công nghệ sử dụng
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   Laravel 10
+-   Bootstrap 5
+-   MySQL
+-   JavaScript & jQuery
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Cài đặt
 
-## Laravel Sponsors
+### 1. Clone repository
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```sh
+git clone https://github.com/your-username/clinic-management.git
+cd clinic-management
+```
 
-### Premium Partners
+### 2. Cấu hình môi trường
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Sao chép file `.env.example` và cập nhật thông tin database:
 
-## Contributing
+```sh
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Cài đặt thư viện
 
-## Code of Conduct
+```sh
+composer install
+npm install && npm run dev
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 4. Chạy database migration
 
-## Security Vulnerabilities
+```sh
+php artisan migrate --seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 5. Chạy dự án
 
-## License
+```sh
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Truy cập: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+## Hình ảnh giao diện
+
+### 🔹 Quản lý dịch vụ
+
+![Service Management](https://via.placeholder.com/800x400?text=Service+Management)
+
+### 🔹 Đặt lịch khám
+
+![Appointment Booking](https://via.placeholder.com/800x400?text=Appointment+Booking)
+
+### 🔹 Quản lý bác sĩ
+
+![Doctor Management](https://via.placeholder.com/800x400?text=Doctor+Management)
+
+## Đóng góp
+
+Bạn có thể đóng góp bằng cách fork repo, tạo branch mới và gửi pull request.
+
+```sh
+git checkout -b feature/new-feature
+```
+
+## Giấy phép
+
+Dự án được phát hành theo giấy phép **MIT License**.
+
+---
+
+💙 Cảm ơn bạn đã sử dụng hệ thống quản lý phòng khám da liễu!
