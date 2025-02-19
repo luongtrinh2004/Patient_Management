@@ -84,7 +84,6 @@
                         </div>
 
 
-
                         <style>
                         /* Grid hiển thị dịch vụ */
                         .grid-3 {
@@ -104,7 +103,13 @@
                             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
                             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
                             text-align: center;
-                            padding-bottom: 15px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            /* Căn đều ảnh và tên */
+                            align-items: stretch;
+                            height: auto;
+                            /* Loại bỏ chiều cao cố định */
                         }
 
                         .grid-item:hover {
@@ -115,10 +120,9 @@
                         /* Hình ảnh dịch vụ */
                         .grid-item img {
                             width: 100%;
-                            height: 220px;
-                            /* Chiều cao cố định */
+                            height: 200px;
                             object-fit: cover;
-                            /* Cắt ảnh vừa với khung */
+                            /* Ảnh che kín ô */
                             border-bottom: 3px solid #00AEEF;
                         }
 
@@ -131,6 +135,9 @@
                             margin: 0;
                             background: #EAF6FF;
                             border-radius: 0 0 12px 12px;
+                            text-align: center;
+                            flex-grow: 1;
+                            /* Đẩy sát ảnh, tránh khoảng thừa */
                         }
                         </style>
 
