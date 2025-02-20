@@ -1,6 +1,6 @@
 # 🏥 Quản Lý Phòng Khám Da Liễu
 
-![Clinic Management System](img/readme.png)
+![Clinic Management System](https://github.com/luongtrinh2004/Patient_Management/blob/main/public/img/readme.png)
 
 ## 🚀 Giới thiệu
 
@@ -79,19 +79,19 @@ Mở trình duyệt và truy cập: [http://127.0.0.1:8000](http://127.0.0.1:800
 
 ### 🔹 Trang quản lý Admin
 
-![Admin Dashboard](img/adminreadme.png)
+![Admin Dashboard](public/img/adminreadme.png)
 
 ### 🔹 Quản lý dịch vụ
 
-![Service Management](quanlydichvureadme.png)
+![Service Management](public/img/quanlydichvureadme.png)
 
 ### 🔹 Đặt lịch khám
 
-![Appointment Booking](img/quanlylichhenreadme.png)
+![Appointment Booking](public/img/quanlylichhenreadme.png)
 
 ### 🔹 Quản lý bác sĩ
 
-![Doctor Management](img/quanlybacsireadme.png)
+![Doctor Management](public/img/quanlybacsireadme.png.png)
 
 ### 🔹 Hóa đơn & Thanh toán
 
@@ -100,35 +100,6 @@ em đang phát triển ạ
 
 ### 🔹 Hỗ trợ bệnh nhân
 
-![Patient Support](img/quanlyhotroreadme.png)
+![Patient Support](public/img/quanlyhotroreadme.png)
 
 ---
-
-## 🤝 Đóng góp
-
-💡 Nếu bạn muốn đóng góp, hãy làm theo các bước sau:
-
-1. **Fork** repository này.
-2. Tạo một **branch mới** để thêm tính năng hoặc sửa lỗi.
-    ```sh
-    git checkout -b feature/new-feature
-    ```
-3. Commit thay đổi của bạn.
-    ```sh
-    git commit -m "Thêm tính năng XYZ"
-    ```
-4. Push code lên GitHub.
-    ```sh
-    git push origin feature/new-feature
-    ```
-5. Mở một **Pull Request** để đóng góp code của bạn.
-
----
-
-## 📜 Giấy phép
-
-Dự án này được phát hành theo giấy phép **MIT License**.
-
----
-
-💙 **Cảm ơn bạn đã sử dụng hệ thống quản lý phòng khám da liễu!** 🏥
