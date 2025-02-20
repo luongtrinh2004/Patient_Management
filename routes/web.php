@@ -83,12 +83,17 @@ Route::get('/get-doctors/{specialty}', [DoctorController::class, 'getDoctorsBySp
 
 // Route hiển thị dịch vụ cho bệnh nhân
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+// Route hiển thị dịch vụ cho bệnh nhân view home
+Route::get('/', [ServiceController::class, 'index_home'])->name('services.index_home');
+
 
 Route::get('/contact', function () {
     return view('contact'); // Trang Contact
 })->name('contact');
 
 // Home Route sau khi đăng nhập
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
 // Routes đặt lịch khám
@@ -115,6 +120,9 @@ Route::middleware(['auth'])->group(function () {
 // Routes cho Hỗ trợ
 Route::get('/support', [SupportController::class, 'create'])->name('support.create');
 Route::post('/support', [SupportController::class, 'store'])->name('support.store');
+
+// Route cho Hỗ trợ trên home
+Route::post('/', [SupportController::class, 'store'])->name('support.store_home');
 
 // Chatbot
 Route::get('/chatbot', [ChatbotController::class, 'index'])->name('chatbot.index');
