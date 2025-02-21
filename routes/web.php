@@ -98,8 +98,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Routes đặt lịch khám
 Route::middleware(['auth'])->group(function () {
-    Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
-    Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
+    Route::get('/admin/appointments', [AdminController::class, 'showAppointments'])->name('admin.appointments.index');
+    Route::post('/admin/appointments/store', [AdminController::class, 'storeAppointment'])->name('admin.appointments.store');
+    Route::post('/admin/appointments/{id}/update', [AdminController::class, 'updateAppointment'])->name('admin.appointments.update');
+    Route::delete('/admin/appointments/{id}', [AdminController::class, 'deleteAppointment'])->name('admin.appointments.destroy');
+    Route::put('/admin/appointments/{id}/approve', [AdminController::class, 'approveAppointment'])->name('admin.appointments.approve');
+    Route::put('/admin/appointments/{id}/reject', [AdminController::class, 'rejectAppointment'])->name('admin.appointments.reject');
+    Route::get('/get-doctors-by-specialty', [AdminController::class, 'getDoctorsBySpecialty']);
 
     Route::middleware(['auth', 'role:admindoctor'])->group(function () {
         Route::get('/admindoctor/dashboard', [DoctorController::class, 'showDashboard'])->name('admindoctor.dashboard');
