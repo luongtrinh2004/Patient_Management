@@ -20,10 +20,8 @@ class CreateMedicalRecordsTable extends Migration
         $table->text('prescription')->nullable(); // Toa thuốc
         $table->text('notes')->nullable(); // Ghi chú thêm
 
-        $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade'); 
         $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
 
-        $table->index('doctor_id');
         $table->index('patient_id');
         $table->timestamps();
     });
