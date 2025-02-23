@@ -11,6 +11,8 @@ use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\MedicalRecordController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DoctorMedicalRecordController;
+
 
 // Trang chủ
 Route::get('/', function () {
@@ -66,8 +68,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 // Routes cho quản lý Hồ Sơ Bệnh Án (Medical Records)
-// Cho phép truy cập bởi cả Admin và AdminDoctor
-Route::middleware(['auth', 'role:admin,admindoctor'])->group(function () {
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/medicalrecords', [MedicalRecordController::class, 'index'])->name('admin.medicalrecords.index');
     Route::get('/admin/medicalrecords/{id}/edit', [MedicalRecordController::class, 'edit'])->name('admin.medicalrecords.edit');
     Route::post('/admin/medicalrecords', [MedicalRecordController::class, 'store'])->name('admin.medicalrecords.store');
@@ -76,6 +78,13 @@ Route::middleware(['auth', 'role:admin,admindoctor'])->group(function () {
 });
 
 
+Route::middleware(['auth', 'role:admindoctor'])->group(function () {
+    Route::get('/admindoctor/medicalrecords', [DoctorMedicalRecordController::class, 'index'])->name('admindoctor.medicalrecords.index');
+    Route::get('/admindoctor/medicalrecords/{id}/edit', [DoctorMedicalRecordController::class, 'edit'])->name('admindoctor.medicalrecords.edit');
+    Route::post('/admindoctor/medicalrecords', [DoctorMedicalRecordController::class, 'store'])->name('admindoctor.medicalrecords.store');
+    Route::put('/admindoctor/medicalrecords/{id}', [DoctorMedicalRecordController::class, 'update'])->name('admindoctor.medicalrecords.update');
+    Route::delete('/admindoctor/medicalrecords/{id}', [DoctorMedicalRecordController::class, 'destroy'])->name('admindoctor.medicalrecords.destroy');
+});
 
 // Routes cho AdminDoctor (Xem lịch nhưng không chỉnh sửa)
 Route::middleware(['auth', 'role:admindoctor'])->group(function () {
