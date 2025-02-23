@@ -9,17 +9,26 @@ class MedicalRecord extends Model
 {
     use HasFactory;
 
+
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
+    }
+
+
     protected $fillable = [
-        'exam_date', 'diagnosis', 'prescription', 'notes', 'patient_id'
+        'doctor_id',
+        'name',
+        'email',
+        'phone',
+        'age',
+        'cccd',
+        'service',
+        'exam_date',
+        'cost',
+        'status',
+        'diagnosis',
+        'prescription',
+        'notes'
     ];
-
-    public function patient()
-    {
-        return $this->belongsTo(Patient::class);
-    }
-
-    public function invoice()
-    {
-        return $this->hasOne(Invoice::class);
-    }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\MedicalRecordController;
 use Illuminate\Support\Facades\Route;
 
 // Trang chủ
@@ -64,6 +65,18 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 });
 
+// Routes cho quản lý Hồ Sơ Bệnh Án (Medical Records)
+// Cho phép truy cập bởi cả Admin và AdminDoctor
+Route::middleware(['auth', 'role:admin,admindoctor'])->group(function () {
+    Route::get('/admin/medicalrecords', [MedicalRecordController::class, 'index'])->name('admin.medicalrecords.index');
+    Route::get('/admin/medicalrecords/{id}/edit', [MedicalRecordController::class, 'edit'])->name('admin.medicalrecords.edit');
+    Route::post('/admin/medicalrecords', [MedicalRecordController::class, 'store'])->name('admin.medicalrecords.store');
+    Route::put('/admin/medicalrecords/{id}', [MedicalRecordController::class, 'update'])->name('admin.medicalrecords.update');
+    Route::delete('/admin/medicalrecords/{id}', [MedicalRecordController::class, 'destroy'])->name('admin.medicalrecords.destroy');
+});
+
+
+
 // Routes cho AdminDoctor (Xem lịch nhưng không chỉnh sửa)
 Route::middleware(['auth', 'role:admindoctor'])->group(function () {
     Route::get('/admindoctor/dashboard', function () {
@@ -86,14 +99,11 @@ Route::get('/services', [ServiceController::class, 'index'])->name('services.ind
 // Route hiển thị dịch vụ cho bệnh nhân view home
 Route::get('/', [ServiceController::class, 'index_home'])->name('services.index_home');
 
-
 Route::get('/contact', function () {
     return view('contact'); // Trang Contact
 })->name('contact');
 
 // Home Route sau khi đăng nhập
-
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
 // Routes đặt lịch khám
