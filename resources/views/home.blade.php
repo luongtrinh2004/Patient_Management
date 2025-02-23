@@ -127,7 +127,7 @@
               <p style="text-align: justify; font-size: 16px;"><span style="font-size: 16px; white-space: pre-wrap;">PHENIKAAMEC nuôi dưỡng khát vọng cống hiến, vun đắp niềm tin, nỗ lực vươn tầm nhằm mang đến các giá trị cho xã hội và nâng cao sức khỏe cộng đồng với mục tiêu:</span></p>
             </div>
           </div>
-          <img src="./img/img1.webp" alt="" class="object-cover h-[312px] rounded-xl w-full" style="">
+          <img src="./img/img36.webp" alt="" class="object-cover h-[312px] rounded-xl w-full" style="">
         </div>
         <h2 class="title-blue-1">Tầm nhìn - sứ mệnh - giá trị cốt lõi</h2>
         <div class="grid-3" style="margin:20px 25px;margin-left: 85px;">
