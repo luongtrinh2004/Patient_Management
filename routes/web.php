@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\PatientController;
-
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
@@ -28,12 +27,12 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
-    Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+// Routes cho bệnh nhân
+Route::middleware(['auth', 'role:patient'])->group(function () {
+    Route::get('/patients', [PatientController::class, 'index'])->name('patients.index');
+    Route::get('/appointments', [PatientController::class, 'appointments'])->name('patients.appointments');
+    Route::post('/appointments', [PatientController::class, 'bookAppointment'])->name('patients.book');
 });
-
 
 // Routes cho Admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -52,11 +51,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/admin/appointments/{id}/approve', [AdminController::class, 'approveAppointment'])->name('admin.appointments.approve');
     Route::put('/admin/appointments/{id}/reject', [AdminController::class, 'rejectAppointment'])->name('admin.appointments.reject');
     Route::delete('/admin/appointments/{id}', [AdminController::class, 'deleteAppointment'])->name('admin.appointments.delete');
-    Route::get('/admin/medicalrecords', [MedicalRecordController::class, 'index'])->name('admin.medicalrecords.index');
-    Route::get('/admin/medicalrecords/{id}/edit', [MedicalRecordController::class, 'edit'])->name('admin.medicalrecords.edit');
-    Route::post('/admin/medicalrecords', [MedicalRecordController::class, 'store'])->name('admin.medicalrecords.store');
-    Route::put('/admin/medicalrecords/{id}', [MedicalRecordController::class, 'update'])->name('admin.medicalrecords.update');
-    Route::delete('/admin/medicalrecords/{id}', [MedicalRecordController::class, 'destroy'])->name('admin.medicalrecords.destroy');
+
     // Routes for managing supports
     Route::get('/admin/supports', [SupportController::class, 'index'])->name('admin.supports.index');
     Route::delete('/admin/supports/{id}', [SupportController::class, 'destroy'])->name('admin.supports.destroy');
@@ -74,32 +69,22 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 // Routes cho quản lý Hồ Sơ Bệnh Án (Medical Records)
 
-Route::middleware(['auth', 'role:admindoctor'])->group(function () {
-    Route::get('/admindoctor/dashboard', function () {
-        return view('role.admindoctor');
-    })->name('admindoctor.dashboard');
-
-    // Quản lý lịch khám
-    Route::get('/admindoctor/schedule', [DoctorController::class, 'showSchedule'])->name('doctor.schedule');
-    Route::get('/admindoctor/patients', [DoctorController::class, 'showPatients'])->name('doctor.patients');
-
-    // Quản lý hồ sơ bệnh án
-    Route::middleware(['auth', 'role:admindoctor'])->group(function () {
-        Route::get('/admindoctor/medicalrecords', [DoctorMedicalRecordController::class, 'index'])->name('admindoctor.medicalrecords.index');
-        Route::get('/admindoctor/medicalrecords/create', [DoctorMedicalRecordController::class, 'createFromAppointment'])->name('admindoctor.medicalrecords.create');
-        Route::post('/admindoctor/medicalrecords', [DoctorMedicalRecordController::class, 'store'])->name('admindoctor.medicalrecords.store');
-        Route::get('/admindoctor/medicalrecords/{id}/edit', [DoctorMedicalRecordController::class, 'edit'])->name('admindoctor.medicalrecords.edit');
-        Route::put('/admindoctor/medicalrecords/{id}', [DoctorMedicalRecordController::class, 'update'])->name('admindoctor.medicalrecords.update');
-        Route::delete('/admindoctor/medicalrecords/{id}', [DoctorMedicalRecordController::class, 'destroy'])->name('admindoctor.medicalrecords.destroy');
-        Route::get('/admindoctor/medicalrecords', [DoctorMedicalRecordController::class, 'index'])->name('admindoctor.medicalrecords.index');
-        Route::get('/admindoctor/medicalrecords/create', [DoctorMedicalRecordController::class, 'createFromAppointment'])->name('admindoctor.medicalrecords.create');
-        Route::post('/admindoctor/medicalrecords', [DoctorMedicalRecordController::class, 'store'])->name('admindoctor.medicalrecords.store');
-        Route::get('/admindoctor/medicalrecords/{id}/edit', [DoctorMedicalRecordController::class, 'edit'])->name('admindoctor.medicalrecords.edit');
-        Route::put('/admindoctor/medicalrecords/{id}', [DoctorMedicalRecordController::class, 'update'])->name('admindoctor.medicalrecords.update');
-        Route::delete('/admindoctor/medicalrecords/{id}', [DoctorMedicalRecordController::class, 'destroy'])->name('admindoctor.medicalrecords.destroy');
-    });
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/medicalrecords', [MedicalRecordController::class, 'index'])->name('admin.medicalrecords.index');
+    Route::get('/admin/medicalrecords/{id}/edit', [MedicalRecordController::class, 'edit'])->name('admin.medicalrecords.edit');
+    Route::post('/admin/medicalrecords', [MedicalRecordController::class, 'store'])->name('admin.medicalrecords.store');
+    Route::put('/admin/medicalrecords/{id}', [MedicalRecordController::class, 'update'])->name('admin.medicalrecords.update');
+    Route::delete('/admin/medicalrecords/{id}', [MedicalRecordController::class, 'destroy'])->name('admin.medicalrecords.destroy');
 });
 
+
+Route::middleware(['auth', 'role:admindoctor'])->group(function () {
+    Route::get('/admindoctor/medicalrecords', [DoctorMedicalRecordController::class, 'index'])->name('admindoctor.medicalrecords.index');
+    Route::get('/admindoctor/medicalrecords/{id}/edit', [DoctorMedicalRecordController::class, 'edit'])->name('admindoctor.medicalrecords.edit');
+    Route::post('/admindoctor/medicalrecords', [DoctorMedicalRecordController::class, 'store'])->name('admindoctor.medicalrecords.store');
+    Route::put('/admindoctor/medicalrecords/{id}', [DoctorMedicalRecordController::class, 'update'])->name('admindoctor.medicalrecords.update');
+    Route::delete('/admindoctor/medicalrecords/{id}', [DoctorMedicalRecordController::class, 'destroy'])->name('admindoctor.medicalrecords.destroy');
+});
 
 // Routes cho AdminDoctor (Xem lịch nhưng không chỉnh sửa)
 Route::middleware(['auth', 'role:admindoctor'])->group(function () {
@@ -165,4 +150,3 @@ Route::post('/', [SupportController::class, 'store'])->name('support.store_home'
 
 // Chatbot
 Route::get('/chatbot', [ChatbotController::class, 'index'])->name('chatbot.index');
-Route::post('/chatbot/send', [ChatbotController::class, 'sendMessage'])->name('chatbot.send');

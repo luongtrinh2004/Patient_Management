@@ -16,7 +16,7 @@
         </form>
 
         <!-- Kiểm tra nếu đang chỉnh sửa hoặc tạo mới -->
-        <h3 class="mb-3">{{ isset($editMedicalRecord) ? 'Sửa Hồ Sơ Bệnh Án' : 'Thêm Hồ Sơ Bệnh Án' }}</h3>
+        <h3 class="mb-3">{{ isset($creatMedicalRecord) ? 'Sửa Hồ Sơ Bệnh Án' : 'Thêm Hồ Sơ Bệnh Án' }}</h3>
 
         <@php $isEditing = isset($editMedicalRecord) && !empty($editMedicalRecord->id);
         @endphp

@@ -74,7 +74,7 @@ class DoctorMedicalRecordController extends Controller
             'notes' => $request->notes,
         ]);
 
-        return redirect()->route('admindoctor.medicalrecords.index')
+        return redirect()->route('admindoctor.medicalrecord.index')
             ->with('success', 'Hồ sơ bệnh án đã được tạo thành công.');
     }
 
@@ -138,29 +138,5 @@ class DoctorMedicalRecordController extends Controller
             ->with('success', 'Hồ sơ bệnh án đã được xóa thành công.');
     }
 
-    // 📌 Tạo hồ sơ bệnh án từ lịch hẹn
-    public function createFromAppointment(Request $request)
-    {
-        $appointmentId = $request->input('appointment_id');
-        $appointment = Appointment::findOrFail($appointmentId); // Lấy lịch hẹn
-
-        // ✅ Tạo hồ sơ bệnh án mới nhưng KHÔNG có ID
-        $editMedicalRecord = new MedicalRecord([
-            'name' => $appointment->name,
-            'email' => $appointment->email,
-            'phone' => $appointment->phone,
-            'age' => $appointment->age,
-            'cccd' => $appointment->cccd,
-            'exam_date' => $appointment->appointment_date,
-        ]);
-
-        // ✅ Chắc chắn ID = NULL để form nhận diện là thêm mới
-        $editMedicalRecord->id = null;
-
-        // ✅ Lấy danh sách các hồ sơ bệnh án hiện có của bác sĩ
-        $medicalRecords = MedicalRecord::where('doctor_id', Auth::id())->latest()->get();
-
-        return view('role.doctormanagemedicalrecords', compact('editMedicalRecord', 'medicalRecords'));
-    }
 
 }
