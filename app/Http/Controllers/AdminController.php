@@ -62,6 +62,9 @@ class AdminController extends Controller
             'phone' => $request->phone,
             'bio' => $request->bio,
             'image' => $filePath,
+            'working_hours' => 'required|array',
+            'working_hours.*.day' => 'required|in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday',
+            'working_hours.*.shift' => 'required|in:morning,afternoon'
         ]);
 
         // Thêm tài khoản vào bảng users
@@ -70,6 +73,7 @@ class AdminController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role' => 'admindoctor',
+            'working_hours' => $request->working_hours,
         ]);
 
         return redirect()->route('admin.doctors.index')
@@ -92,6 +96,9 @@ class AdminController extends Controller
             'phone' => 'required|string',
             'bio' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'working_hours' => 'nullable|array', // Cho phép lịch làm việc rỗng
+            'working_hours.*.day' => 'required_with:working_hours|in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday',
+            'working_hours.*.shift' => 'required_with:working_hours|in:morning,afternoon',
         ]);
 
         // Xử lý ảnh (nếu có)
@@ -106,7 +113,15 @@ class AdminController extends Controller
         }
 
         // Cập nhật thông tin bác sĩ
-        $doctor->update($request->all());
+        $doctor->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'specialty' => $request->specialty,
+            'phone' => $request->phone,
+            'bio' => $request->bio,
+            'working_hours' => $request->filled('working_hours') ? $request->working_hours : null,
+        ]);
+
 
         // Chuyển hướng về danh sách bác sĩ kèm thông báo
         return redirect()->route('admin.doctors.index')->with('success', 'Thông tin bác sĩ đã được cập nhật.');
@@ -225,6 +240,7 @@ class AdminController extends Controller
             'age' => 'required|integer',
             'cccd' => 'required|string|unique:appointments,cccd',
             'appointment_date' => 'required|date',
+            'shift' => 'required|in:morning,afternoon',
             'description' => 'nullable|string',
             'doctor_id' => 'required|exists:doctors,id',
             'specialty' => 'required|string',
@@ -247,6 +263,7 @@ class AdminController extends Controller
             'age' => $request->age,
             'cccd' => $request->cccd,
             'appointment_date' => $request->appointment_date,
+            'shift' => $request->shift,
             'description' => $request->description,
             'doctor_id' => $doctor->id,
             'specialty' => $request->specialty,
@@ -268,6 +285,7 @@ class AdminController extends Controller
             'specialty' => 'required|string',
             'doctor_id' => 'required|exists:doctors,id',
             'appointment_date' => 'required|date',
+            'shift' => 'required|in:morning,afternoon',
             'name' => 'required|string|max:255',
             'email' => 'required|email',
             'phone' => 'required|string',
@@ -310,5 +328,38 @@ class AdminController extends Controller
 
         return response()->json($formattedSchedules);
     }
+    public function getWorkingHours(Request $request)
+    {
+        $doctor = Doctor::findOrFail($request->doctor_id);
+        $selectedDate = $request->query('date');
+        $dayOfWeek = date('l', strtotime($selectedDate)); // Lấy thứ trong tuần (Monday, Tuesday, ...)
 
+
+
+        $workingHours = $doctor->working_hours;
+
+        if (!is_array($workingHours)) {
+            return response()->json(['error' => 'Lịch làm việc không hợp lệ'], 400);
+        }
+
+        $availableShifts = ['morning' => false, 'afternoon' => false];
+
+        foreach ($workingHours as $entry) {
+            if (isset($entry['day'], $entry['shift']) && $entry['day'] === $dayOfWeek) {
+                if ($entry['shift'] === 'morning' || $entry['shift'] === 'both') {
+                    $availableShifts['morning'] = true;
+                }
+                if ($entry['shift'] === 'afternoon' || $entry['shift'] === 'both') {
+                    $availableShifts['afternoon'] = true;
+                }
+            }
+        }
+
+        return response()->json($availableShifts);
+    }
+    public function showshift()
+    {
+        $doctors = Doctor::all(['id', 'name', 'specialty', 'phone', 'image', 'working_hours']);
+        return view('role.workingschedule', compact('doctors'));
+    }
 }

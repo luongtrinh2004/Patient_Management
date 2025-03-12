@@ -7,6 +7,7 @@ use App\Models\Appointment;
 use App\Models\Doctor; // Thêm dòng này
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+
 class AppointmentController extends Controller
 {
     // Hiển thị form đặt Lịch
@@ -28,6 +29,7 @@ class AppointmentController extends Controller
             'age' => 'required|integer|min:1',
             'cccd' => 'required|string|max:20',
             'appointment_date' => 'required|date|after:today',
+            'shift' => 'required|in:morning,afternoon',
             'description' => 'nullable|string|max:500',
         ]);
 
@@ -39,6 +41,7 @@ class AppointmentController extends Controller
             'age' => $request->age,
             'cccd' => $request->cccd,
             'appointment_date' => $request->appointment_date,
+            'shift' => $request->shift,
             'description' => $request->description,
             'status' => 'approved',
         ]);
