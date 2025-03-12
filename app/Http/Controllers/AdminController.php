@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Models\Appointment;
 use App\Models\User;
+use Carbon\Carbon;
+use App\Models\DoctorSchedule;
 
 class AdminController extends Controller
 {
@@ -223,7 +225,6 @@ class AdminController extends Controller
             'age' => 'required|integer',
             'cccd' => 'required|string|unique:appointments,cccd',
             'appointment_date' => 'required|date',
-            'shift' => 'required|in:morning,afternoon',
             'description' => 'nullable|string',
             'doctor_id' => 'required|exists:doctors,id',
             'specialty' => 'required|string',
@@ -246,7 +247,6 @@ class AdminController extends Controller
             'age' => $request->age,
             'cccd' => $request->cccd,
             'appointment_date' => $request->appointment_date,
-            'shift' => $request->shift,
             'description' => $request->description,
             'doctor_id' => $doctor->id,
             'specialty' => $request->specialty,
@@ -268,7 +268,6 @@ class AdminController extends Controller
             'specialty' => 'required|string',
             'doctor_id' => 'required|exists:doctors,id',
             'appointment_date' => 'required|date',
-            'shift' => 'required|in:morning,afternoon',
             'name' => 'required|string|max:255',
             'email' => 'required|email',
             'phone' => 'required|string',
@@ -281,38 +280,35 @@ class AdminController extends Controller
 
         return redirect()->route('admin.appointments.index')->with('success', 'Lịch hẹn đã được cập nhật.');
     }
-    public function getWorkingHours(Request $request)
+
+    public function getDoctorScheduleWithFutureDates($doctorId)
     {
-        $doctor = Doctor::findOrFail($request->doctor_id);
-        $selectedDate = $request->query('date');
-        $dayOfWeek = date('l', strtotime($selectedDate)); // Lấy thứ trong tuần (Monday, Tuesday, ...)
+        // Lấy lịch làm việc của bác sĩ
+        $schedules = DoctorSchedule::where('doctor_id', $doctorId)->get();
 
-
-
-        $workingHours = $doctor->working_hours;
-
-        if (!is_array($workingHours)) {
-            return response()->json(['error' => 'Lịch làm việc không hợp lệ'], 400);
+        if ($schedules->isEmpty()) {
+            return response()->json(['error' => 'Không có lịch làm việc'], 404);
         }
 
-        $availableShifts = ['morning' => false, 'afternoon' => false];
+        $formattedSchedules = [];
 
-        foreach ($workingHours as $entry) {
-            if (isset($entry['day'], $entry['shift']) && $entry['day'] === $dayOfWeek) {
-                if ($entry['shift'] === 'morning' || $entry['shift'] === 'both') {
-                    $availableShifts['morning'] = true;
-                }
-                if ($entry['shift'] === 'afternoon' || $entry['shift'] === 'both') {
-                    $availableShifts['afternoon'] = true;
-                }
+        foreach ($schedules as $schedule) {
+            $currentDate = now(); // Ngày hiện tại
+
+            for ($i = 0; $i < 6; $i++) { // Lấy 6 tuần tiếp theo của lịch làm việc
+                $nextDate = $currentDate->copy()->next($schedule->day_of_week)->addWeeks($i);
+                $shiftText = $schedule->shift === 'morning' ? '08h-12h' : '14h-18h';
+
+                $formattedSchedules[] = [
+                    'id' => $schedule->id,
+                    'display' => "{$schedule->day_of_week} - {$shiftText} ({$nextDate->format('d/m/Y')})",
+                    'date' => $nextDate->format('Y-m-d'),
+                    'shift' => $schedule->shift
+                ];
             }
         }
 
-        return response()->json($availableShifts);
+        return response()->json($formattedSchedules);
     }
-    public function showshift()
-    {
-        $doctors = Doctor::all(['id', 'name', 'specialty', 'phone', 'image', 'working_hours']);
-        return view('role.workingschedule', compact('doctors'));
-    }
+
 }

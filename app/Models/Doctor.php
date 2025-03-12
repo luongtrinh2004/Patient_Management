@@ -17,7 +17,6 @@ class Doctor extends Model
         'phone',
         'bio',
         'image',
-        'working_hours'
     ];
 
     // Nếu cần hash password, bạn có thể thêm mutator
@@ -25,7 +24,4 @@ class Doctor extends Model
     {
         $this->attributes['password'] = bcrypt($value);
     }
-    protected $casts = [
-        'working_hours' => 'array', // Chuyển đổi dữ liệu thành mảng
-    ];
 }

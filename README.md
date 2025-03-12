@@ -26,7 +26,7 @@
 
 | Công nghệ  | Phiên bản |
 | ---------- | --------- |
-| Laravel    | 7.x       |
+| Laravel    | >7.x      |
 | Bootstrap  | 5.x       |
 | MySQL      | 8.x       |
 | JavaScript | ES6+      |
@@ -34,12 +34,20 @@
 
 ---
 
+### 🔹 Sơ đồ Use-Case
+
+![Use-Case](public/img/uml.png)
+
+### 🔹 Sơ đồ chức năng
+
+![Sơ đồ chức năng](public/img/sodochucnang.png)
+
 ## 🛠 Cài đặt & Khởi chạy
 
 ### 📌 1. Clone repository
 
 ```sh
-git clone https://github.com/luongtrinh2004/Patient_Management.git
+git clone https://github.com/luongtrinh2004/Quan_Ly_Phong_Kham_Da_Lieu
 cd ...
 ```
 
@@ -59,10 +67,26 @@ composer install
 
 ```
 
-### 📌 4. Chạy database migration và seed dữ liệu mẫu
+### 📌 4. Tạo database từ file laravel_backup.sql
 
 ```sh
-php artisan migrate --seed
+
+mysql -u root -p ten_database < laravel_backup.sql
+
+```
+
+### 📌 4. Cập nhật file .env với thông tin database của bạn:
+
+```sh
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ten_database
+DB_USERNAME=root
+DB_PASSWORD=your_password
+
+
 ```
 
 ### 📌 5. Chạy ứng dụng
@@ -93,11 +117,31 @@ php artisan serve
 
 ### 🔹 Hóa đơn & Thanh toán
 
-em đang phát triển ạ
-![Billing & Payments](https://via.placeholder.com/800x400?text=Billing+&+Payments)
+![Billing & Payments](public/img/hoadonthongke.png)
 
 ### 🔹 Hỗ trợ bệnh nhân
 
 ![Patient Support](public/img/quanlyhotroreadme.png)
 
 ---
+
+### 🔹 Deploy Dự Án
+
+```sh
+https://31c4-118-70-185-2.ngrok-free.app
+
+```
+
+### 🔹 Link repo
+
+```sh
+https://github.com/luongtrinh2004/Quan_Ly_Phong_Kham_Da_Lieu
+
+```
+
+### 🔹 Link demo
+
+```sh
+.................
+
+```
