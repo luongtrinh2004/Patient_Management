@@ -383,10 +383,9 @@ class AdminController extends Controller
         ]);
 
         $doctor->update([
-            'working_hours' => json_encode($request->working_hours) // Lưu JSON vào DB
+            'working_hours' => $request->filled('working_hours') ? $request->working_hours : null,
         ]);
 
         return redirect()->route('admin.workingschedule', ['doctor_id' => $id])->with('success', 'Lịch làm việc đã được cập nhật.');
     }
-
 }
