@@ -116,6 +116,8 @@ Route::middleware(['auth', 'role:admindoctor'])->group(function () {
         Route::post('/admindoctor/invoices', [InvoiceController::class, 'store'])->name('admindoctor.invoices.store');
         Route::get('/admindoctor/invoices', [InvoiceController::class, 'index'])->name('admindoctor.invoices.index');
         Route::resource('admindoctor/invoices', InvoiceController::class);
+        Route::get('/admindoctor/invoices/{id}/print', [InvoiceController::class, 'print'])->name('admindoctor.invoices.print');
+
     });
 });
 
