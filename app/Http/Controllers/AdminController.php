@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Doctor;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Appointment;
 use App\Models\User;
 use Carbon\Carbon;
@@ -42,7 +43,11 @@ class AdminController extends Controller
             'phone' => 'required|string',
             'bio' => 'nullable|string',
             'image' => 'nullable|file|max:5120|mimes:jpeg,png,jpg,gif', // Giống như dịch vụ
+            'working_hours' => 'nullable|array', // Cho phép lịch làm việc rỗng
+            'working_hours.*.day' => 'required_with:working_hours|in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday',
+            'working_hours.*.shift' => 'required_with:working_hours|in:morning,afternoon',
         ]);
+
 
         if ($request->hasFile('image')) {
             // Tạo tên file duy nhất để tránh trùng lặp
@@ -57,14 +62,12 @@ class AdminController extends Controller
         $doctor = Doctor::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => Hash::make($request->password),
             'specialty' => $request->specialty,
             'phone' => $request->phone,
             'bio' => $request->bio,
             'image' => $filePath,
-            'working_hours' => 'required|array',
-            'working_hours.*.day' => 'required|in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday',
-            'working_hours.*.shift' => 'required|in:morning,afternoon'
+            'working_hours' => $request->working_hours,
         ]);
 
         // Thêm tài khoản vào bảng users
@@ -73,7 +76,6 @@ class AdminController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role' => 'admindoctor',
-            'working_hours' => $request->working_hours,
         ]);
 
         return redirect()->route('admin.doctors.index')
