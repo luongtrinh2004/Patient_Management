@@ -114,16 +114,30 @@ class AdminController extends Controller
             $doctor->image = 'img/' . $imageName;
         }
 
-        // Cập nhật thông tin bác sĩ
-        $doctor->update([
+
+        $updateData = [
             'name' => $request->name,
             'email' => $request->email,
             'specialty' => $request->specialty,
             'phone' => $request->phone,
             'bio' => $request->bio,
             'working_hours' => $request->filled('working_hours') ? $request->working_hours : null,
-        ]);
+        ];
 
+        // Nếu có nhập mật khẩu mới, cập nhật mật khẩu
+        if ($request->filled('password')) {
+            $updateData['password'] = Hash::make($request->password);
+        }
+
+        // Cập nhật bác sĩ
+        $doctor->update($updateData);
+
+        // Nếu có bảng `users` liên kết với bác sĩ, cập nhật cả tài khoản user
+        User::where('email', $doctor->email)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->filled('password') ? Hash::make($request->password) : $doctor->password,
+        ]);
 
         // Chuyển hướng về danh sách bác sĩ kèm thông báo
         return redirect()->route('admin.doctors.index')->with('success', 'Thông tin bác sĩ đã được cập nhật.');
