@@ -200,49 +200,80 @@
                 </thead>
                 <tbody>
                     @foreach($specialtyGroups as $specialty => $doctorspecialty)
-                                    <tr class="table-primary text-center">
-                                        <td colspan="13"><strong><i class="bi bi-stethoscope"></i> {{ $specialty }}</strong></td>
-                                    </tr>
-                                    @foreach($doctorspecialty as $doctor)
-                                                    <tr>
-                                                        <td>{{ $loop->parent->iteration }}.{{ $loop->iteration }}</td>
-                                                        <td>{{ $doctor->specialty }}</td>
-                                                        <td>{{ $doctor->name }}</td>
-                                                        <td>{{ $doctor->phone }}</td>
-                                                        <td>
-                                                            @if($doctor->image)
-                                                                <img src="{{ asset($doctor->image) }}" class="img-thumbnail" style="max-width: 50px;">
-                                                            @else
-                                                                <span>Không có ảnh</span>
-                                                            @endif
+                                        @php
+                                            $weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                                            $shiftLabels = ['morning' => '08:00 - 12:00', 'afternoon' => '14:00 - 18:00'];
+                                            $specialtyShiftEmpty = [];
+
+                                            // Khởi tạo trạng thái kiểm tra ca làm việc của từng chuyên môn
+                                            foreach ($weekdays as $day) {
+                                                $specialtyShiftEmpty[$day] = ['morning' => true, 'afternoon' => true];
+                                            }
+                                        @endphp
+
+                                        <tr class="table-primary text-center">
+                                            <td colspan="13"><strong><i class="bi bi-stethoscope"></i> {{ $specialty }}</strong></td>
+                                        </tr>
+
+                                        @foreach($doctorspecialty as $doctor)
+                                                        <tr>
+                                                            <td>{{ $loop->parent->iteration }}.{{ $loop->iteration }}</td>
+                                                            <td>{{ $doctor->specialty }}</td>
+                                                            <td>{{ $doctor->name }}</td>
+                                                            <td>{{ $doctor->phone }}</td>
+                                                            <td>
+                                                                @if($doctor->image)
+                                                                    <img src="{{ asset($doctor->image) }}" class="img-thumbnail" style="max-width: 50px;">
+                                                                @else
+                                                                    <span>Không có ảnh</span>
+                                                                @endif
+                                                            </td>
+
+                                                            @php
+                                                                $working_hours = $doctor->working_hours ?? [];
+                                                            @endphp
+
+                                                            @foreach($weekdays as $day)
+                                                                            <td>
+                                                                                @php
+                                                                                    $shifts = collect($working_hours)->where('day', $day)->pluck('shift')->toArray();
+                                                                                @endphp
+                                                                                @if(!empty($shifts))
+                                                                                                @foreach($shifts as $shift)
+                                                                                                    <span class="badge" style="background-color: {{ $shift == 'morning' ? '#2A95BF' : '#FFD700' }};
+                                                                                                                 color: {{ $shift == 'morning' ? 'white' : 'black' }};">
+                                                                                                        {{ $shiftLabels[$shift] }}
+                                                                                                    </span><br>
+                                                                                                @endforeach
+                                                                                                @php
+                                                                                                    // Nếu có bác sĩ trực ca nào thì đánh dấu ca đó không trống
+                                                                                                    foreach ($shifts as $shift) {
+                                                                                                        $specialtyShiftEmpty[$day][$shift] = false;
+                                                                                                    }
+                                                                                                @endphp
+                                                                                @else
+                                                                                    <span class="text-danger">Nghỉ</span>
+                                                                                @endif
+                                                                            </td>
+                                                            @endforeach
+                                                        </tr>
+                                        @endforeach
+
+                                        {{-- Hiển thị cảnh báo ca trống cho từng chuyên môn --}}
+                                        @foreach($specialtyShiftEmpty as $day => $shifts)
+                                            @foreach($shifts as $shift => $isEmpty)
+                                                @if($isEmpty && $day != 'Sunday') {{-- Không cảnh báo nếu là Chủ Nhật --}}
+                                                    <tr class="bg-warning text-center">
+                                                        <td colspan="13" class="text-danger">
+                                                            ⚠️ Chuyên môn "{{ $specialty }}" không có bác sĩ trực vào
+                                                            **{{ __("Thứ " . (array_search($day, $weekdays) + 2)) }} - {{ $shiftLabels[$shift] }}**!
                                                         </td>
-                                                        @php
-                                                            $weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                                                            $working_hours = $doctor->working_hours ?? [];
-                                                        @endphp
-
-                                                        @foreach($weekdays as $day)
-                                                                        <td>
-                                                                            @php
-                                                                                $shifts = collect($working_hours)->where('day', $day)->pluck('shift')->toArray();
-                                                                            @endphp
-                                                                            @if(!empty($shifts))
-                                                                                @foreach($shifts as $shift)
-                                                                                    <span class="badge"
-                                                                                        style="background-color: {{ $shift == 'morning' ? '#2A95BF' : '#FFD700' }}; 
-                                                                                                                                                                                                                               color: {{ $shift == 'morning' ? 'white' : 'black' }};">
-                                                                                        {{ $shift == 'morning' ? '08:00 - 12:00' : '14:00 - 18:00' }}
-                                                                                    </span><br>
-                                                                                @endforeach
-                                                                            @else
-                                                                                <span class="text-danger">Nghỉ</span>
-                                                                            @endif
-                                                                        </td>
-                                                        @endforeach
-
                                                     </tr>
-                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                        @endforeach
                     @endforeach
+
                 </tbody>
             </table>
         </div>
