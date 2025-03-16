@@ -35,7 +35,7 @@ class AdminController extends Controller
 
     public function storeDoctor(Request $request)
     {
-        $request->validate([
+        $validate = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:doctors|unique:users',
             'password' => 'required|string|min:6',
@@ -47,7 +47,7 @@ class AdminController extends Controller
             'working_hours.*.day' => 'required_with:working_hours|in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday',
             'working_hours.*.shift' => 'required_with:working_hours|in:morning,afternoon',
         ]);
-
+        dd($validate);
 
         if ($request->hasFile('image')) {
             // Tạo tên file duy nhất để tránh trùng lặp
