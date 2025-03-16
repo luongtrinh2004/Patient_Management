@@ -36,9 +36,9 @@ Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('/search-doctors', [DoctorController::class, 'search'])->name('doctors.search');
 
 Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
+Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
 Route::middleware(['auth'])->group(function () {
 
-    Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
     Route::get('/appointments/search', [AppointmentController::class, 'searchAppointments'])->name('appointments.search');
 });
 
