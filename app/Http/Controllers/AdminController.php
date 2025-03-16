@@ -374,18 +374,21 @@ class AdminController extends Controller
     }
     public function showshift(Request $request)
     {
+        // Lấy tất cả bác sĩ
         $doctors = Doctor::all(['id', 'name', 'specialty', 'phone', 'image', 'working_hours']);
-        $selectedDoctor = null;
 
+        // Nhóm theo chuyên môn để hiển thị
+        $specialtyGroups = $doctors->groupBy('specialty');
+
+        // Xác định bác sĩ được chọn để sửa lịch
+        $selectedDoctor = null;
         if ($request->has('doctor_id')) {
             $selectedDoctor = Doctor::find($request->doctor_id);
-            if ($selectedDoctor && is_string($selectedDoctor->working_hours)) {
-                $selectedDoctor->working_hours = json_decode($selectedDoctor->working_hours, true) ?? [];
-            }
         }
 
-        return view('role.workingschedule', compact('doctors', 'selectedDoctor'));
+        return view('role.workingschedule', compact('doctors', 'selectedDoctor', 'specialtyGroups'));
     }
+
 
     public function updateSchedule(Request $request, $id)
     {
