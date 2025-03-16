@@ -19,6 +19,7 @@ use App\Http\Controllers\SearchController;
 
 
 
+
 // Trang chủ
 Route::get('/', function () {
     return view('home'); // Trang Home
@@ -32,6 +33,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::get('/search-doctors', [DoctorController::class, 'search'])->name('doctors.search');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');

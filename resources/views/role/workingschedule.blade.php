@@ -128,7 +128,8 @@
                     </form>
                     <!-- Language Dropdown -->
                     <div class="dropdown">
-                        <button class="btn btn-light btn-sm rounded-circle dropdown-toggle" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-light btn-sm rounded-circle dropdown-toggle" id="languageDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('img/iconVN.png') }}" alt="VN" class="img-fluid" style="height: 20px;">
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="languageDropdown">
@@ -143,20 +144,26 @@
 
     <nav class="navbar navbar-expand-lg" style="background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}" style="color: #0056b3; font-family: 'Poppins', sans-serif; font-weight: 500; margin: 0 10px;">Home</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}"
+                            style="color: #0056b3; font-family: 'Poppins', sans-serif; font-weight: 500; margin: 0 10px;">Home</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/about') }}" style="color: #0056b3; font-family: 'Poppins', sans-serif; font-weight: 500; margin: 0 10px;">About
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/about') }}"
+                            style="color: #0056b3; font-family: 'Poppins', sans-serif; font-weight: 500; margin: 0 10px;">About
                             Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/services') }}" style="color: #0056b3; font-family: 'Poppins', sans-serif; font-weight: 500; margin: 0 10px;">Services</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/services') }}"
+                            style="color: #0056b3; font-family: 'Poppins', sans-serif; font-weight: 500; margin: 0 10px;">Services</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}" style="color: #0056b3; font-family: 'Poppins', sans-serif; font-weight: 500; margin: 0 10px;">Contact</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}"
+                            style="color: #0056b3; font-family: 'Poppins', sans-serif; font-weight: 500; margin: 0 10px;">Contact</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/doctors') }}" style="color: #0056b3; font-family: 'Poppins', sans-serif; font-weight: 500; margin: 0 10px;">Doctors</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/doctors') }}"
+                            style="color: #0056b3; font-family: 'Poppins', sans-serif; font-weight: 500; margin: 0 10px;">Doctors</a>
                     </li>
                 </ul>
             </div>
@@ -167,7 +174,7 @@
 
 
     <div class="container py-4">
-        <h1 class="text-center mb-4"><i class="bi bi-calendar-check"></i> Lịch Làm Việc Theo Chuyên Môn</h1>
+        <h1 class="text-center mb-4"> Lịch Làm Việc Theo Chuyên Môn</h1>
 
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -178,7 +185,7 @@
                         <th>Bác sĩ</th>
                         <th>Điện thoại</th>
                         <th>Ảnh</th>
-                        <th colspan="7"><i class="bi bi-calendar3"></i> Lịch Trực Trong Tuần</th>
+                        <th colspan="7" class="text-center"><i class="bi bi-calendar3"></i> Lịch Trực Trong Tuần</th>
                     </tr>
                     <tr>
                         <th colspan="5"></th>
@@ -193,51 +200,55 @@
                 </thead>
                 <tbody>
                     @foreach($specialtyGroups as $specialty => $doctorspecialty)
-                    <tr class="table-primary text-center">
-                        <td colspan="13"><strong><i class="bi bi-stethoscope"></i> {{ $specialty }}</strong></td>
-                    </tr>
-                    @foreach($doctorspecialty as $doctor)
-                    <tr>
-                        <td>{{ $loop->parent->iteration }}.{{ $loop->iteration }}</td>
-                        <td>{{ $doctor->specialty }}</td>
-                        <td>{{ $doctor->name }}</td>
-                        <td>{{ $doctor->phone }}</td>
-                        <td>
-                            @if($doctor->image)
-                            <img src="{{ asset($doctor->image) }}" class="img-thumbnail" style="max-width: 50px;">
-                            @else
-                            <span>Không có ảnh</span>
-                            @endif
-                        </td>
-                        @php
-                        $weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                        $working_hours = $doctor->working_hours ?? [];
-                        @endphp
+                                    <tr class="table-primary text-center">
+                                        <td colspan="13"><strong><i class="bi bi-stethoscope"></i> {{ $specialty }}</strong></td>
+                                    </tr>
+                                    @foreach($doctorspecialty as $doctor)
+                                                    <tr>
+                                                        <td>{{ $loop->parent->iteration }}.{{ $loop->iteration }}</td>
+                                                        <td>{{ $doctor->specialty }}</td>
+                                                        <td>{{ $doctor->name }}</td>
+                                                        <td>{{ $doctor->phone }}</td>
+                                                        <td>
+                                                            @if($doctor->image)
+                                                                <img src="{{ asset($doctor->image) }}" class="img-thumbnail" style="max-width: 50px;">
+                                                            @else
+                                                                <span>Không có ảnh</span>
+                                                            @endif
+                                                        </td>
+                                                        @php
+                                                            $weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                                                            $working_hours = $doctor->working_hours ?? [];
+                                                        @endphp
 
-                        @foreach($weekdays as $day)
-                        <td>
-                            @php
-                            $shifts = collect($working_hours)->where('day', $day)->pluck('shift')->toArray();
-                            @endphp
-                            @if(!empty($shifts))
-                            @foreach($shifts as $shift)
-                            <span class="badge bg-success">{{ $shift == 'morning' ? '08:00 - 12:00' : '14:00 - 18:00' }}</span><br>
-                            @endforeach
-                            @else
-                            <span class="text-danger">Nghỉ</span>
-                            @endif
-                        </td>
-                        @endforeach
+                                                        @foreach($weekdays as $day)
+                                                                        <td>
+                                                                            @php
+                                                                                $shifts = collect($working_hours)->where('day', $day)->pluck('shift')->toArray();
+                                                                            @endphp
+                                                                            @if(!empty($shifts))
+                                                                                @foreach($shifts as $shift)
+                                                                                    <span class="badge"
+                                                                                        style="background-color: {{ $shift == 'morning' ? '#2A95BF' : '#FFD700' }}; 
+                                                                                                                                                                                                                               color: {{ $shift == 'morning' ? 'white' : 'black' }};">
+                                                                                        {{ $shift == 'morning' ? '08:00 - 12:00' : '14:00 - 18:00' }}
+                                                                                    </span><br>
+                                                                                @endforeach
+                                                                            @else
+                                                                                <span class="text-danger">Nghỉ</span>
+                                                                            @endif
+                                                                        </td>
+                                                        @endforeach
 
-                    </tr>
-                    @endforeach
+                                                    </tr>
+                                    @endforeach
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
     <div class="container py-5" id="loaddoctor">
-        <h2 class="text-center mb-4" style="font-weight: 700; color: #0056b3;">🗓 Chỉnh Sửa Lịch Làm Việc</h2>
+        <h2 class="text-center mb-4" style="font-weight: 700; color: #0056b3;">Chỉnh Sửa Lịch Làm Việc</h2>
 
         <!-- Chọn bác sĩ -->
         <div class="mb-4">
@@ -245,75 +256,77 @@
             <select id="doctorSelect" class="form-control" onchange="loadDoctorSchedule()">
                 <option value="">-- Chọn bác sĩ --</option>
                 @foreach ($doctors as $doctor)
-                <option value="{{ $doctor->id }}" {{ isset($selectedDoctor) && $selectedDoctor->id == $doctor->id ? 'selected' : '' }}>
-                    {{ $doctor->name }}
-                </option>
+                    <option value="{{ $doctor->id }}" {{ isset($selectedDoctor) && $selectedDoctor->id == $doctor->id ? 'selected' : '' }}>
+                        {{ $doctor->name }}
+                    </option>
                 @endforeach
             </select>
         </div>
 
 
         @if(isset($selectedDoctor))
-        <!-- Thông tin bác sĩ -->
-        <div class="card shadow-sm mb-4">
-            <div class="card-body text-center">
-                <h4 class="mb-2">Thông tin bác sĩ</h4>
-                <img src="{{ asset($selectedDoctor->image) }}" class="rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;" alt="{{ $selectedDoctor->name }}">
-                <p><strong>{{ $selectedDoctor->name }}</strong></p>
-                <p><strong>Chuyên môn:</strong> {{ $selectedDoctor->specialty }}</p>
-                <p><strong>Số điện thoại:</strong> {{ $selectedDoctor->phone }}</p>
-            </div>
-        </div>
-
-        <!-- Form chỉnh sửa lịch làm việc -->
-        <form method="POST" action="{{ route('admin.updateSchedule', $selectedDoctor->id) }}" id="updateScheduleForm">
-            @csrf
-            <div class="card shadow-sm">
-                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-                    <span> Chỉnh sửa lịch làm việc</span>
-                    <button type="button" class="btn btn-light btn-sm" onclick="addScheduleRow()">+ Thêm ca làm
-                        việc</button>
-                </div>
-                <div class="card-body" id="scheduleContainer">
-                    @php
-                    $workingHours = is_array($selectedDoctor->working_hours) ? $selectedDoctor->working_hours :
-                    json_decode($selectedDoctor->working_hours, true) ?? [];
-                    @endphp
-
-                    @foreach ($workingHours as $index => $schedule)
-                    <div class="schedule-row d-flex align-items-center mb-2">
-                        <select name="working_hours[{{ $index }}][day]" class="form-select me-2">
-                            <option value="Monday" {{ $schedule['day'] == 'Monday' ? 'selected' : '' }}>Thứ Hai</option>
-                            <option value="Tuesday" {{ $schedule['day'] == 'Tuesday' ? 'selected' : '' }}>Thứ Ba
-                            </option>
-                            <option value="Wednesday" {{ $schedule['day'] == 'Wednesday' ? 'selected' : '' }}>Thứ Tư
-                            </option>
-                            <option value="Thursday" {{ $schedule['day'] == 'Thursday' ? 'selected' : '' }}>Thứ Năm
-                            </option>
-                            <option value="Friday" {{ $schedule['day'] == 'Friday' ? 'selected' : '' }}>Thứ Sáu</option>
-                            <option value="Saturday" {{ $schedule['day'] == 'Saturday' ? 'selected' : '' }}>Thứ Bảy
-                            </option>
-                            <option value="Sunday" {{ $schedule['day'] == 'Sunday' ? 'selected' : '' }}>Chủ Nhật
-                            </option>
-                        </select>
-
-                        <select name="working_hours[{{ $index }}][shift]" class="form-select me-2">
-                            <option value="morning" {{ $schedule['shift'] == 'morning' ? 'selected' : '' }}>08:00 -
-                                12:00
-                            </option>
-                            <option value="afternoon" {{ $schedule['shift'] == 'afternoon' ? 'selected' : '' }}>14:00 -
-                                18:00</option>
-                        </select>
-
-                        <button type="button" class="btn btn-danger btn-sm" onclick="removeScheduleRow(this)">Xóa</button>
+                <!-- Thông tin bác sĩ -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <h4 class="mb-2">Thông tin bác sĩ</h4>
+                        <img src="{{ asset($selectedDoctor->image) }}" class="rounded-circle mb-3"
+                            style="width: 100px; height: 100px; object-fit: cover;" alt="{{ $selectedDoctor->name }}">
+                        <p><strong>{{ $selectedDoctor->name }}</strong></p>
+                        <p><strong>Chuyên môn:</strong> {{ $selectedDoctor->specialty }}</p>
+                        <p><strong>Số điện thoại:</strong> {{ $selectedDoctor->phone }}</p>
                     </div>
-                    @endforeach
                 </div>
-                <div class="card-footer text-center">
-                    <button type="submit" class="btn btn-warning">Lưu Thay Đổi</button>
-                </div>
-            </div>
-        </form>
+
+                <!-- Form chỉnh sửa lịch làm việc -->
+                <form method="POST" action="{{ route('admin.updateSchedule', $selectedDoctor->id) }}" id="updateScheduleForm">
+                    @csrf
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                            <span> Chỉnh sửa lịch làm việc</span>
+                            <button type="button" class="btn btn-light btn-sm" onclick="addScheduleRow()">+ Thêm ca làm
+                                việc</button>
+                        </div>
+                        <div class="card-body" id="scheduleContainer">
+                            @php
+                                $workingHours = is_array($selectedDoctor->working_hours) ? $selectedDoctor->working_hours :
+                                    json_decode($selectedDoctor->working_hours, true) ?? [];
+                            @endphp
+
+                            @foreach ($workingHours as $index => $schedule)
+                                <div class="schedule-row d-flex align-items-center mb-2">
+                                    <select name="working_hours[{{ $index }}][day]" class="form-select me-2">
+                                        <option value="Monday" {{ $schedule['day'] == 'Monday' ? 'selected' : '' }}>Thứ Hai</option>
+                                        <option value="Tuesday" {{ $schedule['day'] == 'Tuesday' ? 'selected' : '' }}>Thứ Ba
+                                        </option>
+                                        <option value="Wednesday" {{ $schedule['day'] == 'Wednesday' ? 'selected' : '' }}>Thứ Tư
+                                        </option>
+                                        <option value="Thursday" {{ $schedule['day'] == 'Thursday' ? 'selected' : '' }}>Thứ Năm
+                                        </option>
+                                        <option value="Friday" {{ $schedule['day'] == 'Friday' ? 'selected' : '' }}>Thứ Sáu</option>
+                                        <option value="Saturday" {{ $schedule['day'] == 'Saturday' ? 'selected' : '' }}>Thứ Bảy
+                                        </option>
+                                        <option value="Sunday" {{ $schedule['day'] == 'Sunday' ? 'selected' : '' }}>Chủ Nhật
+                                        </option>
+                                    </select>
+
+                                    <select name="working_hours[{{ $index }}][shift]" class="form-select me-2">
+                                        <option value="morning" {{ $schedule['shift'] == 'morning' ? 'selected' : '' }}>08:00 -
+                                            12:00
+                                        </option>
+                                        <option value="afternoon" {{ $schedule['shift'] == 'afternoon' ? 'selected' : '' }}>14:00 -
+                                            18:00</option>
+                                    </select>
+
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                        onclick="removeScheduleRow(this)">Xóa</button>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-warning">Lưu Thay Đổi</button>
+                        </div>
+                    </div>
+                </form>
         @endif
     </div>
 
@@ -355,7 +368,7 @@
                 window.location.href = `?doctor_id=${doctorId}`;
             }
         }
-        window.onload = function() {
+        window.onload = function () {
             if (localStorage.getItem("scrollToForm") === "true") {
                 setTimeout(() => {
                     document.getElementById('loaddoctor').scrollIntoView({
@@ -377,7 +390,8 @@
                     <p><strong>Bệnh viện Đại Học Phenikaa</strong></p>
                     <p>📍 Đường Kiều Mai, P. Phương Canh, Nam Từ Liêm, Hà Nội</p>
                     <p>📜 Giấy phép hoạt động số 386/BYT</p>
-                    <p>📞 Hotline: <a href="tel:1900886648">1900.88.66.48</a> - <a href="tel:02422226688">02422226688</a></p>
+                    <p>📞 Hotline: <a href="tel:1900886648">1900.88.66.48</a> - <a
+                            href="tel:02422226688">02422226688</a></p>
                     <p>📧 Email: <a href="mailto:support@phenikaamec.com">support@phenikaamec.com</a></p>
                 </div>
                 <!-- Cột 2: Hệ thống phòng khám -->
